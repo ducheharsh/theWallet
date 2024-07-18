@@ -6,6 +6,7 @@ import { Input } from "./ui/input"
 import { Select } from "./ui/select"
 import { useState } from "react"
 import axios from "axios"
+import { createOnRampTransactions } from "../app/lib/actions/Transactions"
 
 const SUPPORTED_BANKS = [{
     name: "HDFC Bank",
@@ -18,6 +19,7 @@ const SUPPORTED_BANKS = [{
 export default function AddMoney() {
     const [redirectUrl, setRedirectUrl] = useState(SUPPORTED_BANKS[0]?.redirectUrl);
     const [amount, setAmount] = useState(0);
+    const [provider, setProvider] = useState(SUPPORTED_BANKS[0]?.name)
     return(
         <Card className='mt-6 w-[35vw] h-fit'>
         <CardHeader>
@@ -35,19 +37,17 @@ export default function AddMoney() {
             <div className='flex flex-col mt-6' >
          <Select onSelect={(value:any) => {
             setRedirectUrl(SUPPORTED_BANKS.find(x => x.name === value)?.redirectUrl || "")
+            setProvider(SUPPORTED_BANKS.find(x => x.name === value)?.name || "")
         }} options={SUPPORTED_BANKS.map(x => ({
             key: x.name,
             value: x.name
         }))} />
 <div className="mt-6">
-            <Button onClick={() => {
-                axios.post("/api/transactions", {
-                    amount: amount,
-                    token:"token__13"
-                }).then((res) => {
-                    console.log(res.data)
-                })
-            }}>
+            <Button onClick={async()=>{
+                window.location.href = redirectUrl || "";
+                const res = await createOnRampTransactions({amount, provider: provider || ""})
+                alert(res.message);
+                }}>
             Add Money
             </Button>
             </div>
