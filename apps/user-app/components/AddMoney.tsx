@@ -5,6 +5,7 @@ import { Button } from "@repo/ui/button"
 import { Input } from "./ui/input"
 import { Select } from "./ui/select"
 import { useState } from "react"
+import axios from "axios"
 
 const SUPPORTED_BANKS = [{
     name: "HDFC Bank",
@@ -16,6 +17,7 @@ const SUPPORTED_BANKS = [{
 
 export default function AddMoney() {
     const [redirectUrl, setRedirectUrl] = useState(SUPPORTED_BANKS[0]?.redirectUrl);
+    const [amount, setAmount] = useState(0);
     return(
         <Card className='mt-6 w-[35vw] h-fit'>
         <CardHeader>
@@ -26,7 +28,9 @@ export default function AddMoney() {
     
             <div className='flex flex-col ' >
                 <h1>Amount</h1>
-                <Input type='number' placeholder='Enter Amount' />
+                <Input type='number' onChange={(e)=>{
+                    setAmount(Number(e.target.value))
+                }} placeholder='Enter Amount' />
             </div>
             <div className='flex flex-col mt-6' >
          <Select onSelect={(value:any) => {
@@ -37,7 +41,12 @@ export default function AddMoney() {
         }))} />
 <div className="mt-6">
             <Button onClick={() => {
-                window.location.href = redirectUrl || "";
+                axios.post("/api/transactions", {
+                    amount: amount,
+                    token:"token__13"
+                }).then((res) => {
+                    console.log(res.data)
+                })
             }}>
             Add Money
             </Button>
