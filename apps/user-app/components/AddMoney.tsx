@@ -7,6 +7,7 @@ import { Select } from "./ui/select"
 import { useState } from "react"
 import axios from "axios"
 import { createOnRampTransactions } from "../app/lib/actions/Transactions"
+import { useSession } from "next-auth/react"
 
 const SUPPORTED_BANKS = [{
     name: "HDFC Bank",
@@ -17,9 +18,11 @@ const SUPPORTED_BANKS = [{
 }];
 
 export default function AddMoney() {
+    const session = useSession();
     const [redirectUrl, setRedirectUrl] = useState(SUPPORTED_BANKS[0]?.redirectUrl);
     const [amount, setAmount] = useState(0);
     const [provider, setProvider] = useState(SUPPORTED_BANKS[0]?.name)
+    console.log()
     return(
         <Card className='mt-6 w-[35vw] h-fit'>
         <CardHeader>
@@ -43,10 +46,19 @@ export default function AddMoney() {
             value: x.name
         }))} />
 <div className="mt-6">
-            <Button onClick={async()=>{
-                window.location.href = redirectUrl || "";
-                const res = await createOnRampTransactions({amount, provider: provider || ""})
-                alert(res.message);
+            <Button onClick={async()=>{ 
+                const res = await createOnRampTransactions({amount, provider: provider || ""}).then((res)=>{
+                 axios.post("http://localhost:3301/api/v1/hdfc/transfer", {
+                        amount,
+                        userId:session.data?.user?.id,
+                        token:res.token
+                    }).then((BankRequest)=>{
+                        BankRequest.data.message === "Transfer Completed" ? alert("Money added successfully") : alert("Error while adding money")
+                    })
+                    
+                })
+               
+                
                 }}>
             Add Money
             </Button>

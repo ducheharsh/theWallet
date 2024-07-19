@@ -10,11 +10,11 @@ const harsh = await prisma.user.upsert({
     update: {},
     create: {
         number: "1111111111",
-        password: await bcrypt.hash("demouser", 10),
+        password: await bcrypt.hash("harsh", 10),
         name: "harsh",
         Balance:{
             create:{
-                amount: 20000,
+                amount: 40000,
                 locked: 0
             }
         },
@@ -38,11 +38,11 @@ const archit = await prisma.user.upsert({
     update: {},
     create: {
         number: "2222222222",
-        password: await bcrypt.hash("demouser2", 10),
+        password: await bcrypt.hash("archit", 10),
         name: "archit",
         Balance:{
             create:{
-                amount: 20000,
+                amount: 40000,
                 locked: 0
             }
         },

@@ -43,7 +43,8 @@ export default function OnRampTransCard({
                 <div>
                     <div className="text-sm">
                         Received INR
-                 
+                        
+                        {t.status}
                     </div>
 
                     <div className="text-slate-600 text-xs">

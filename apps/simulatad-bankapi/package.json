@@ -1,5 +1,5 @@
 {
-  "name": "bank-webhook",
+  "name": "simulatad-bankapi",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -11,14 +11,10 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@repo/db": "*",
-    "@types/express": "^4.17.21",
-    "cors": "^2.8.5",
     "express": "^4.19.2",
-    "prisma": "^5.17.0"
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
-    "esbuild": "^0.23.0",
-    "esbuild-plugin-tsc": "^0.4.0"
+    "@types/uuid": "^10.0.0"
   }
 }

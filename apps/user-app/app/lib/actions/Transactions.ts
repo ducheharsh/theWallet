@@ -22,6 +22,6 @@ export async function createOnRampTransactions({amount, provider}:{amount:number
     })
     return {
         message: "Transaction initiated",
-        transaction
+        token:transaction.token
     };
 }
