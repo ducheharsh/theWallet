@@ -9,6 +9,7 @@ import axios from "axios"
 import { createOnRampTransactions } from "../app/lib/actions/Transactions"
 import { useSession } from "next-auth/react"
 
+
 const SUPPORTED_BANKS = [{
     name: "HDFC Bank",
     redirectUrl: "https://netbanking.hdfcbank.com"
@@ -50,7 +51,7 @@ export default function AddMoney() {
                 const res = await createOnRampTransactions({amount, provider: provider || ""}).then((res)=>{
                  axios.post("http://localhost:3301/api/v1/hdfc/transfer", {
                         amount,
-                        userId:session.data?.user?.id,
+                        userId:(session.data?.user as any)?.id, 
                         token:res.token
                     }).then((BankRequest)=>{
                         BankRequest.data.message === "Transfer Completed" ? alert("Money added successfully") : alert("Error while adding money")

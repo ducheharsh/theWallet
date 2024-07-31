@@ -1,9 +1,7 @@
 
-import { Button } from '@repo/ui/button'
-import Image from 'next/image'
+
 import localFont from 'next/font/local'
-import { Input } from '../../../components/ui/input'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../../components/ui/card'
+
 import BalanceCard from '../../../components/BalanceCard'
 import OnRampTransCard from '../../../components/OnRampTrans'
 import prisma from '@repo/db/client'
@@ -12,7 +10,7 @@ import { authOptions } from '../../lib/auth'
 import AddMoney from '../../../components/AddMoney'
 const myFont = localFont({ src: '../sb.ttf' })
 
-export async function getBalance(){
+ async function getBalance(){
     const session = await getServerSession(authOptions)
     const balance = await prisma.balance.findFirst({
         where:{
