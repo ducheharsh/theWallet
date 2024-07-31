@@ -4,13 +4,8 @@ enum TransactionType {
     Deposit = 'Deposit',
     Withdrawal = 'Withdrawal',
     Transfer = 'Transfer',
-
 }
-enum OnRampStatus {
-    Success,
-    Failure,
-    Processing
-  }
+
 
 export default function OnRampTransCard({
     transactions
@@ -19,7 +14,7 @@ export default function OnRampTransCard({
         time: Date,
         amount: number,
         // TODO: Can the type of `status` be more specific?
-        status: OnRampStatus,
+        status: any,
         provider: string
     }[]
 }) {
