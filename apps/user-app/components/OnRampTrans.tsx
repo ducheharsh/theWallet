@@ -1,10 +1,6 @@
 import { Card, CardContent, CardDescription, CardTitle, CardHeader } from "./ui/card";
 
-enum TransactionType {
-    Deposit = 'Deposit',
-    Withdrawal = 'Withdrawal',
-    Transfer = 'Transfer',
-}
+
 
 
 export default function OnRampTransCard({
