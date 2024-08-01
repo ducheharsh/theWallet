@@ -1,22 +1,20 @@
-"use client"
+"use client";
 
-import { TrendingUp } from "lucide-react"
-import { CartesianGrid, Line, LineChart, XAxis } from "recharts"
+import { CartesianGrid, Line, LineChart, XAxis } from "recharts";
 
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
-} from "./ui/card"
+} from "./ui/card";
 import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "./ui/chart"
+} from "./ui/chart";
 const chartData = [
   { month: "January", expenses: 186 },
   { month: "February", expenses: 305 },
@@ -24,14 +22,14 @@ const chartData = [
   { month: "April", expenses: 73 },
   { month: "May", expenses: 209 },
   { month: "June", expenses: 214 },
-]
+];
 
 const chartConfig = {
   expenses: {
     label: "Expenses",
     color: "purple",
   },
-} satisfies ChartConfig
+} satisfies ChartConfig;
 
 export function ChartComp() {
   return (
@@ -72,7 +70,6 @@ export function ChartComp() {
           </LineChart>
         </ChartContainer>
       </CardContent>
-
     </Card>
-  )
+  );
 }
